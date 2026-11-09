@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpendWise Interactive Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="logo"><h2>SpendWise</h2><p>Finance Dashboard</p></div>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#dashboard" class="nav-item active">Dashboard</a>
+        <a href="#add-expense" class="nav-item">Add Expense</a>
+        <a href="#transactions" class="nav-item">Transactions</a>
+        <a href="#budget-settings" class="nav-item">Budget</a>
+      </nav>
+      <p class="sidebar-note">Plan wisely. Spend wisely.</p>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="header">
+        <div><h1>Dashboard</h1><p>Welcome back! Here's your financial overview.</p></div>
+        <div class="user-info" id="currentMonth">Monthly overview</div>
+      </header>
+
+      <section class="summary" aria-label="Budget summary">
+        <div><p>Total Budget</p><h2 id="totalBudget">KSh 50,000</h2></div>
+        <div><p>Total Spent</p><h2 id="totalSpent">KSh 31,500</h2></div>
+        <div><p>Remaining</p><h2 id="remaining">KSh 18,500</h2></div>
+      </section>
+
+      <section class="budget-status">
+        <div class="status-top"><h2>Budget status</h2><strong id="budgetPercent">63% used</strong></div>
+        <div class="progress-track"><div id="budgetProgress" class="progress-fill"></div></div>
+        <p id="budgetMessage" class="status-message" aria-live="polite">You are within your budget.</p>
+      </section>
+
+      <section class="dashboard-section">
+        <div class="section-heading"><h2>Spending Categories</h2><p>Your spending overview updates when you add or remove records.</p></div>
+        <div class="cards" id="categoryCards"></div>
+      </section>
+
+      <section class="panel dashboard-section" id="add-expense">
+        <div class="section-heading"><h2>Add a transaction</h2><p>Enter an expense or record money set aside as savings.</p></div>
+        <form id="expenseForm" class="expense-form">
+          <label>Record type
+            <select id="recordType" required>
+              <option value="expense">Expense</option>
+              <option value="saving">Savings</option>
+            </select>
+          </label>
+          <label>Description
+            <input id="expenseName" type="text" maxlength="60" placeholder="e.g. Shopping" required>
+          </label>
+          <label>Category
+            <select id="expenseCategory" required>
+              <option>Food</option><option>Transport</option><option>Rent</option>
+              <option>Entertainment</option><option>Utilities</option><option>Savings</option>
+            </select>
+          </label>
+          <label>Amount (KSh)
+            <input id="expenseAmount" type="number" min="1" step="0.01" placeholder="e.g. 500" required>
+          </label>
+          <button type="submit" class="primary-button">Add transaction</button>
+        </form>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </section>
+
+      <section class="panel dashboard-section" id="transactions">
+        <div class="section-heading"><h2>Recent transactions</h2><p>All records are stored in this browser on this device.</p></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Description</th><th>Category</th><th>Type</th><th>Amount</th><th>Action</th></tr></thead>
+            <tbody id="transactionRows"></tbody>
+          </table>
+        </div>
+        <p id="emptyMessage" class="empty-message" hidden>No transactions yet. Add your first transaction above.</p>
+        <button id="clearTransactions" class="secondary-button" type="button">Clear all records</button>
+      </section>
+
+      <section class="panel dashboard-section" id="budget-settings">
+        <div class="section-heading"><h2>Monthly budget settings</h2><p>Change your budget target at any time.</p></div>
+        <form id="budgetForm" class="budget-form">
+          <label for="budgetInput">Monthly budget (KSh)</label>
+          <input id="budgetInput" type="number" min="1" step="0.01" value="50000" required>
+          <button class="primary-button" type="submit">Update budget</button>
+        </form>
+        <p id="budgetFormMessage" class="form-message" aria-live="polite"></p>
+      </section>
+
+      <footer class="footer">SpendWise • Interactive JavaScript Budget Tracker</footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
